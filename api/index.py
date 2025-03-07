@@ -13,10 +13,23 @@ def get_authenticated_service():
     SCOPES = ['https://www.googleapis.com/auth/youtube.force-ssl']
     
     print("Initializing YouTube authentication...")
-    if 'GOOGLE_APPLICATION_CREDENTIALS_JSON' in os.environ:
-        creds_json = os.environ['GOOGLE_APPLICATION_CREDENTIALS_JSON']
-        credentials_info = json.loads(json.dumps(json.loads(creds_json)))
-        print(credentials_info)
+    if 'GOOGLE_PRIVATE_KEY' in os.environ:
+        creds_json = {
+          "type": "service_account",
+          "project_id": "flash-hour-453023-a0",
+          "private_key_id": "f9331a933d457107d8c75eaf53f4968302a5e485",
+          "private_key": os.environ.get("GOOGLE_PRIVATE_KEY"),
+          "client_email": "council-meeting-service@flash-hour-453023-a0.iam.gserviceaccount.com",
+          "client_id": "106736129592262048868",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://oauth2.googleapis.com/token",
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/council-meeting-service%40flash-hour-453023-a0.iam.gserviceaccount.com",
+          "universe_domain": "googleapis.com"
+        }
+
+        print(creds_json)
+        credentials_info = creds_json
         print("Found credentials in environment variable")
         
         credentials = service_account.Credentials.from_service_account_info(credentials_info, scopes=SCOPES)
