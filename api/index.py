@@ -16,8 +16,10 @@ def get_authenticated_service():
     if 'GOOGLE_APPLICATION_CREDENTIALS_JSON' in os.environ:
         creds_json = os.environ['GOOGLE_APPLICATION_CREDENTIALS_JSON']
         credentials_info = json.loads(creds_json)
+        print("found credentials")
         credentials = service_account.Credentials.from_service_account_info(credentials_info, scopes=SCOPES)
     else:
+        print("didn't find credentials")
         credentials_path = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS', 'credentials.json')
         credentials = service_account.Credentials.from_service_account_file(credentials_path, scopes=SCOPES)
     
