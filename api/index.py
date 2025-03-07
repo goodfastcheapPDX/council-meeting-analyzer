@@ -8,11 +8,6 @@ import re
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return 'Hello, World!'
-
-
 def get_authenticated_service():
     """Get an authenticated YouTube service using service account credentials"""
     SCOPES = ['https://www.googleapis.com/auth/youtube.force-ssl']
@@ -218,6 +213,7 @@ def format_time(seconds):
 def transcript_api():
     """API endpoint to get transcript for a YouTube video"""
     video_id = request.args.get('id')
+    print(request.args)
     if not video_id:
         return jsonify({'error': 'Missing video ID parameter. Use ?id=VIDEO_ID'}), 400
     
