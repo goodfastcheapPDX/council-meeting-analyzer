@@ -29,10 +29,10 @@ def get_authenticated_service():
         }
 
 
-        print(creds_json)
         credentials_info = creds_json
         creds_json["private_key"] = os.environ.get("GOOGLE_PRIVATE_KEY", "").replace("\\n", "\n")
         print("Found credentials in environment variable")
+        print(creds_json)
         
         credentials = service_account.Credentials.from_service_account_info(credentials_info, scopes=SCOPES)
         print("Successfully credentialed...")
