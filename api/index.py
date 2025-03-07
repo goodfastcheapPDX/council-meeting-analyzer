@@ -8,6 +8,11 @@ import re
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return 'Hello, World!'
+
+
 def get_authenticated_service():
     """Get an authenticated YouTube service using service account credentials"""
     SCOPES = ['https://www.googleapis.com/auth/youtube.force-ssl']
