@@ -15,8 +15,10 @@ def get_authenticated_service():
     print("Initializing YouTube authentication...")
     if 'GOOGLE_APPLICATION_CREDENTIALS_JSON' in os.environ:
         creds_json = os.environ['GOOGLE_APPLICATION_CREDENTIALS_JSON']
-        credentials_info = json.loads(creds_json)
+        credentials_info = json.loads(json.dumps(json.loads(creds_json)))
+        print(credentials_info)
         print("Found credentials in environment variable")
+        
         credentials = service_account.Credentials.from_service_account_info(credentials_info, scopes=SCOPES)
     else:
         print("Credentials not found in environment variable, checking file...")
